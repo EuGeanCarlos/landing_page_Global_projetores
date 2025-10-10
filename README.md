@@ -39,7 +39,7 @@ Google Fonts - Tipografia moderna
 Font Awesome - Ícones profissionais
 
 📁 Estrutura do Projeto
-text
+
 landing_page_Global_projetores/
 │
 ├── index.html              # Página principal
