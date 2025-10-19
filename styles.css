@@ -292,6 +292,23 @@ nav a:hover:after {
     color: var(--text-light);
     margin-bottom: 10px;
 }
+.carousel a{
+    background: var(--secondary);
+    color: white;
+    padding: 5px 28px;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 10px rgba(255, 107, 53, 0.3);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
 
 /* BOTÕES DO CARROSSEL - CORRIGIDOS */
 .carousel-btn {

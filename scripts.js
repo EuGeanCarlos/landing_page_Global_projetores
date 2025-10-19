@@ -1,7 +1,6 @@
 // ==========================================================================
 // CARRROSSEL DE PRODUTOS
 // ==========================================================================
-
 const products = [
     {
         title:'Infocus SP2236ST',
@@ -31,6 +30,16 @@ const products = [
         link:'https://www.globalprojetores.com.br/projetor-benq-lu935st'
     },
     {
+        title:'ViewSonic LS740W',
+        brightness:'5000 ANSI',
+        type:'Laser',
+        res:'WUXGA',
+        short:'Ótima para templos médios e grandes.',
+        img:'img/projetores-carrossel/ViewSonic_LS740W_M1.jpeg',
+        link:'https://www.globalprojetores.com.br/projetor-viewsonic-ls740w'
+    },
+    
+    {
         title:'ViewSonic PS502WST',
         brightness:'4000 ANSI',
         type:'Lâmpada',
@@ -38,16 +47,8 @@ const products = [
         short:'Boa opção econômica.',
         img:'img/projetores-carrossel/ViewSonic_PS502WST_M1.jpeg',
         link:'https://www.globalprojetores.com.br/projetor-viewsonic-ps502wst--4000--curta-distancia'
-    },
-    {
-        title:'ViewSonic LS740W',
-        brightness:'5000 ANSI',
-        type:'Laser',
-        res:'WUXGA',
-        short:'Ótima para templos médios e grandes.',
-        img:'img/projetores-carrossel/LS740W_M1.jpeg',
-        link:'https://www.globalprojetores.com.br/projetor-viewsonic-ls740w'
     }
+    
 ];
 
 const track = document.getElementById('carouselTrack'); 
@@ -65,7 +66,7 @@ function renderCarousel() {
         const div = document.createElement('div');
         div.className = 'carousel-item';
         div.innerHTML = `
-            <img src="${p.img}" alt="${p.title}" loading="lazy">
+            <img src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.src='img/placeholder.jpg'">
             <h3>${p.title}</h3>
             <p>${p.short}</p>
             <p><b>${p.brightness}</b> • ${p.type} • ${p.res}</p>
@@ -112,6 +113,29 @@ function startCarouselAutoPlay() {
         moveSlide(1) 
     }, 5000);
 }
+
+// Debug helper para verificar se as imagens estão carregando
+function checkImages() {
+    products.forEach((product, index) => {
+        const img = new Image();
+        img.onload = function() {
+            console.log(`✅ Imagem ${index + 1} (${product.title}): Carregada com sucesso`);
+        };
+        img.onerror = function() {
+            console.log(`❌ Imagem ${index + 1} (${product.title}): ERRO ao carregar - ${product.img}`);
+        };
+        img.src = product.img;
+    });
+}
+
+// Inicializar quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', function() {
+    renderCarousel();
+    startCarouselAutoPlay();
+    
+    // Verificar se as imagens estão carregando (apenas para debug)
+    setTimeout(checkImages, 1000);
+});
 
 // ==========================================================================
 // GALERIAS INTERATIVAS
