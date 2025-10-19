@@ -38,7 +38,6 @@ const products = [
         img:'img/projetores-carrossel/ViewSonic_LS740W_M1.jpeg',
         link:'https://www.globalprojetores.com.br/projetor-viewsonic-ls740w'
     },
-    
     {
         title:'ViewSonic PS502WST',
         brightness:'4000 ANSI',
@@ -48,7 +47,6 @@ const products = [
         img:'img/projetores-carrossel/ViewSonic_PS502WST_M1.jpeg',
         link:'https://www.globalprojetores.com.br/projetor-viewsonic-ps502wst--4000--curta-distancia'
     }
-    
 ];
 
 const track = document.getElementById('carouselTrack'); 
@@ -127,15 +125,6 @@ function checkImages() {
         img.src = product.img;
     });
 }
-
-// Inicializar quando o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', function() {
-    renderCarousel();
-    startCarouselAutoPlay();
-    
-    // Verificar se as imagens estão carregando (apenas para debug)
-    setTimeout(checkImages, 1000);
-});
 
 // ==========================================================================
 // GALERIAS INTERATIVAS
@@ -246,6 +235,69 @@ function initInteractiveGalleries() {
 }
 
 // ==========================================================================
+// MENU MOBILE - CORRIGIDO
+// ==========================================================================
+
+function initMobileMenu() {
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (!menuToggle || !navMenu) {
+        console.log('Elementos do menu mobile não encontrados');
+        return;
+    }
+    
+    console.log('Inicializando menu mobile...');
+    
+    menuToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        this.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        
+        if (navMenu.classList.contains('active')) {
+            document.body.classList.add('menu-open');
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Fechar menu ao clicar nos links
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+        });
+    });
+    
+    // Fechar menu ao clicar fora
+    document.addEventListener('click', function(e) {
+        if (navMenu.classList.contains('active') && 
+            !navMenu.contains(e.target) && 
+            e.target !== menuToggle) {
+            menuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Fechar menu ao redimensionar para desktop
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+            menuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
+// ==========================================================================
 // FUNÇÕES GERAIS
 // ==========================================================================
 
@@ -334,7 +386,7 @@ function initContactForm() {
 }
 
 // ==========================================================================
-// INICIALIZAÇÃO GERAL
+// INICIALIZAÇÃO GERAL - ATUALIZADA
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -349,6 +401,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScroll();
     initWhatsAppButton();
     initContactForm();
+    initMobileMenu(); // ← MENU MOBILE ADICIONADO
     
     // Atualizar ano no footer
     const yearElement = document.getElementById('year');
@@ -374,6 +427,9 @@ document.addEventListener('DOMContentLoaded', function() {
             startCarouselAutoPlay();
         }
     });
+    
+    // Verificar se as imagens estão carregando (apenas para debug)
+    setTimeout(checkImages, 1000);
 });
 
 // ==========================================================================

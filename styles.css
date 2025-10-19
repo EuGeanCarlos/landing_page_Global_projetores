@@ -61,15 +61,15 @@ h2 {
     margin-top: 2.5rem;
     position: relative;
     padding-bottom: 0.5rem;
-    text-align: center; /* Centralizando h2 */
+    text-align: center;
 }
 
 h2:after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 50%; /* Centralizando a borda */
-    transform: translateX(-50%); /* Centralizando a borda */
+    left: 50%;
+    transform: translateX(-50%);
     width: 60px;
     height: 4px;
     background: var(--primary);
@@ -136,7 +136,7 @@ p {
 }
 
 /* ==========================================================================
-   CABEÇALHO E NAVEGAÇÃO
+   CABEÇALHO E NAVEGAÇÃO - CORRIGIDO
    ========================================================================== */
 header {
     background: #fff;
@@ -151,6 +151,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .logo {
@@ -164,10 +165,13 @@ header {
     color: var(--secondary);
 }
 
+/* Menu Desktop */
 nav ul {
     display: flex;
     list-style: none;
     gap: 30px;
+    margin: 0;
+    padding: 0;
 }
 
 nav a {
@@ -197,6 +201,119 @@ nav a:hover {
 
 nav a:hover:after {
     width: 100%;
+}
+
+/* Botão Menu Mobile */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    width: 30px;
+    height: 24px;
+    position: relative;
+    z-index: 1001;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--primary);
+    margin: 3px 0;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+/* Menu Mobile Aberto */
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Responsivo Menu Mobile */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: #fff;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        z-index: 1000;
+        padding: 80px 20px 20px;
+        overflow-y: auto;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .nav-menu ul {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .nav-menu li {
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 15px 0;
+        font-size: 1.1rem;
+    }
+
+    .nav-menu a:after {
+        display: none;
+    }
+
+    .nav-menu a:hover {
+        color: var(--primary);
+        background: #f8f9fa;
+    }
+
+    /* Overlay quando menu está aberto */
+    body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-content {
+        padding: 10px 0;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .nav-menu {
+        width: 85%;
+    }
 }
 
 /* ==========================================================================
@@ -237,7 +354,7 @@ nav a:hover:after {
 }
 
 /* ==========================================================================
-   COMPONENTE CARROSSEL - CORRIGIDO
+   COMPONENTE CARROSSEL
    ========================================================================== */
 .carousel {
     position: relative;
@@ -246,7 +363,7 @@ nav a:hover:after {
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-lg);
     background: var(--light);
-    padding: 30px 60px; /* Aumentado padding para os botões */
+    padding: 30px 60px;
 }
 
 .carousel-track-wrapper {
@@ -292,7 +409,8 @@ nav a:hover:after {
     color: var(--text-light);
     margin-bottom: 10px;
 }
-.carousel a{
+
+.carousel a {
     background: var(--secondary);
     color: white;
     padding: 5px 28px;
@@ -309,8 +427,7 @@ nav a:hover:after {
     text-align: center;
 }
 
-
-/* BOTÕES DO CARROSSEL - CORRIGIDOS */
+/* BOTÕES DO CARROSSEL */
 .carousel-btn {
     position: absolute;
     top: 50%;
@@ -392,7 +509,7 @@ nav a:hover:after {
     background: var(--primary);
     color: #fff;
     padding: 30px 40px;
-    text-align: center; /* Centralizando header do produto */
+    text-align: center;
 }
 
 .product-header h3 {
@@ -834,7 +951,7 @@ tr:hover {
     border-radius: var(--border-radius);
     margin: 50px 0;
     box-shadow: var(--shadow-lg);
-    text-align: center; /* Centralizando conteúdo */
+    text-align: center;
 }
 
 /* ==========================================================================
@@ -965,7 +1082,7 @@ tr:hover {
 }
 
 /* ==========================================================================
-   RODAPÉ - CORRIGIDO PARA MOBILE
+   RODAPÉ
    ========================================================================== */
 footer {
     background-color: var(--dark);
@@ -985,7 +1102,7 @@ footer {
 
 .footer-section {
     margin-bottom: 30px;
-    text-align: left; /* Default para desktop */
+    text-align: left;
 }
 
 .footer-section h3 {
@@ -1100,7 +1217,7 @@ footer {
 }
 
 /* ==========================================================================
-   RESPONSIVIDADE - CORREÇÕES APLICADAS
+   RESPONSIVIDADE
    ========================================================================== */
 @media (max-width: 968px) {
     .hero {
@@ -1140,7 +1257,7 @@ footer {
 
 @media (max-width: 768px) {
     .header-content {
-        flex-direction: column;
+        flex-direction: row;
         gap: 20px;
     }
     
@@ -1164,7 +1281,7 @@ footer {
     }
     
     .carousel {
-        padding: 30px 50px; /* Ajuste para mobile */
+        padding: 30px 50px;
     }
     
     .carousel-btn {
@@ -1215,42 +1332,41 @@ footer {
         padding: 30px 25px;
     }
     
-    /* RODAPÉ CENTRALIZADO NO MOBILE */
     .footer-container {
         grid-template-columns: 1fr;
         gap: 20px;
-        text-align: center; /* Centralizando conteúdo do rodapé */
+        text-align: center;
     }
     
     .footer-section {
-        text-align: center; /* Centralizando cada seção */
+        text-align: center;
     }
     
     .footer-section h3:after {
         left: 50%;
-        transform: translateX(-50%); /* Centralizando a borda do título */
+        transform: translateX(-50%);
     }
     
     .footer-section a {
-        justify-content: center; /* Centralizando links */
+        justify-content: center;
     }
     
     .payment-methods {
-        justify-content: center; /* Centralizando métodos de pagamento */
+        justify-content: center;
     }
     
     .contact-info {
-        align-items: center; /* Centralizando informações de contato */
+        align-items: center;
     }
     
     .contact-item {
-        justify-content: center; /* Centralizando itens de contato */
+        justify-content: center;
     }
 }
 
 @media (max-width: 600px) {
     .carousel {
-        padding: 20px 40px; /* Menos padding no mobile pequeno */
+        padding: 20px 40px;
     }
     
     .carousel-item {
@@ -1338,7 +1454,7 @@ footer {
     }
     
     .carousel {
-        padding: 15px 30px; /* Padding mínimo para mobile muito pequeno */
+        padding: 15px 30px;
     }
     
     .carousel-item {
@@ -1349,7 +1465,6 @@ footer {
         padding: 25px;
     }
     
-    /* Ajustes finos para mobile muito pequeno */
     .footer-section h3 {
         font-size: 1.1rem;
     }
