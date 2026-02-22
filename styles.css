@@ -136,8 +136,9 @@ p {
 }
 
 /* ==========================================================================
-   CABEÇALHO E NAVEGAÇÃO - CORRIGIDO
+   CABEÇALHO E NAVEGAÇÃO 
    ========================================================================== */
+
 header {
     background: #fff;
     box-shadow: var(--shadow-sm);
@@ -240,24 +241,75 @@ nav a:hover:after {
     transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* Responsivo Menu Mobile */
+/* Ícones do Menu Mobile */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    z-index: 1001;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-icon, .close-icon {
+    font-size: 28px;
+    color: var(--primary);
+    transition: all 0.3s ease;
+    position: absolute;
+}
+
+.menu-icon {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.close-icon {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+/* Quando o menu está ativo */
+.menu-toggle.active .menu-icon {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.menu-toggle.active .close-icon {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Efeito hover suave */
+.menu-toggle:hover .menu-icon,
+.menu-toggle:hover .close-icon {
+    color: var(--secondary);
+    transform: scale(1.1);
+}
+
+/* Menu Mobile */
 @media (max-width: 768px) {
     .menu-toggle {
         display: flex;
+       
     }
 
     .nav-menu {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 80%;
-        max-width: 300px;
+        width: 280px;
         height: 100vh;
         background: #fff;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
         transition: right 0.3s ease;
         z-index: 1000;
-        padding: 80px 20px 20px;
+        padding: 80px 30px 30px;
         overflow-y: auto;
     }
 
@@ -278,6 +330,7 @@ nav a:hover:after {
         display: block;
         padding: 15px 0;
         font-size: 1.1rem;
+        color: var(--text);
     }
 
     .nav-menu a:after {
@@ -290,8 +343,8 @@ nav a:hover:after {
     }
 
     /* Overlay quando menu está aberto */
-    body.menu-open::before {
-        content: '';
+    .nav-overlay {
+        display: none;
         position: fixed;
         top: 0;
         left: 0;
@@ -299,6 +352,10 @@ nav a:hover:after {
         height: 100%;
         background: rgba(0, 0, 0, 0.5);
         z-index: 999;
+    }
+
+    .nav-overlay.active {
+        display: block;
     }
 }
 
@@ -315,6 +372,7 @@ nav a:hover:after {
         width: 85%;
     }
 }
+
 
 /* ==========================================================================
    SEÇÃO HERO
@@ -891,7 +949,7 @@ tr:hover {
     text-align: left;
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--text);
+    color: var(--primary);
     transition: var(--transition);
 }
 

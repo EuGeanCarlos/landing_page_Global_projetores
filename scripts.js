@@ -35,7 +35,7 @@ const products = [
         type:'Laser',
         res:'WUXGA',
         short:'Ótima para templos médios e grandes.',
-        img:'img/projetores-carrossel/ViewSonic_LS740W_M1.jpeg',
+        img:'img/projetores-carrossel/LS740HD_M1.jpeg',
         link:'https://www.globalprojetores.com.br/projetor-viewsonic-ls740w'
     },
     {

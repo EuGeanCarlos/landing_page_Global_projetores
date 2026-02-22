@@ -9,8 +9,9 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Header -->
- <header>
+
+    <!---     HEADER E NAVEGAÇÃO -->
+  <header>
     <div class="container header-content">
         <div class="logo">
             <img src="img/LogotivoGlobal.svg" alt="Global-Projetores-logo">
@@ -18,9 +19,8 @@
         
         <!-- Botão do menu mobile -->
         <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
-            <span></span>
-            <span></span>
-            <span></span>
+             <span class="menu-icon material-icons">menu</span>
+            <span class="close-icon material-icons">close</span>
         </button>
 
         <nav class="nav-menu" id="navMenu">
@@ -34,6 +34,9 @@
                 <li><a href="#contato">Contato</a></li>
             </ul>
         </nav>
+        
+        <!-- Overlay para fechar o menu -->
+        <div class="nav-overlay" id="navOverlay"></div>
     </div>
 </header>
 
